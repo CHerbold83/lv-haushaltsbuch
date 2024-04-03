@@ -10,6 +10,7 @@ Route::get('/', [IndexController::class,'indexAction'])->name('index');
 Route::get('/detail/{date}', [DetailController::class,'detailAction'])->name('detail');
 
 Route::match(['GET', 'POST'], '/edit/{id?}', [EditController::class,'indexAction'])->name('edit');
+Route::get('/delete/{id}/{date}', [DetailController::class,'deleteFinance'])->name('delete_finance');
 Route::match(['GET', 'POST'], '/login')->name('login');
 
 Route::get('/login', [LoginController::class,'login'])->name('login');
@@ -17,4 +18,4 @@ Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

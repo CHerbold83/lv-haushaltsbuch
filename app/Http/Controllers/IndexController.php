@@ -9,10 +9,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 
 class IndexController extends Controller {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function indexAction():View{
 
         Auth::user()->with('finances')->get()->toArray();
-        $finances = User::find(1)->finances;
+        $finances = User::find(Auth::user()->getAuthIdentifier())->finances;
         $totalIncome = [];
         $totalExpenses = [];
         $total = [];

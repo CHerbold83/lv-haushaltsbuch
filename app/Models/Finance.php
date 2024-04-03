@@ -22,7 +22,7 @@ class Finance extends Model
     protected int $userID; 
     protected $casts = [
         'type' => FinanceType::class,
-        'date' => 'date',
+        'date' => 'datetime:Y-m-d',
     ];
     protected $attributes = [
         'monthly'=> false,

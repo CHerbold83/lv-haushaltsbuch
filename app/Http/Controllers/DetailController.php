@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\FinanceType;
+use App\Models\Finance;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class DetailController extends Controller {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function detailAction($date){
 
         $monthlyIncome = $this->getFinance(true, FinanceType::Income, $date);
@@ -32,13 +36,24 @@ class DetailController extends Controller {
 
     }
 
+    public function deleteFinance($id, $date){
+        
+        $finance = Finance::find($id);
+        if( $finance['id'] != null && $finance['user_id'] == Auth::user()->id){
+            $finance->delete();
+            return redirect()->route('detail', $date)->with('success','Erfolgreich gelöscht');
+        } else {
+            return redirect()->route('detail', $date)->with('error','Kann nicht gelöscht werden');
+        }
+    }
+
     /**
      * gets the finance by date, monthly and type
      */
     public function getFinance(bool $monthly, FinanceType $type, $date):array{
 
         Auth::user()->with('finances')->get()->toArray();
-        $finances = User::find(1)->finances;
+        $finances = User::find(Auth::user()->getAuthIdentifier())->finances;
 
         $fullDate = date('Y-m-d H:i:s', strtotime($date));
         $firstDayOfMonth = Carbon::createFromFormat('Y-m-d H:i:s', $fullDate);

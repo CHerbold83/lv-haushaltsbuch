@@ -1,18 +1,18 @@
-@extends('layouts.base')
+@extends('layouts.app')
 @section('title', 'Home')
 
 @section('header')
-<h5 class="text-center">Übersicht</h5>
+<h5 class="text-center">Finanzübersicht</h5>
 @endsection
 
 @section('content')
 <div class="container text-center">
-    <a class="center btn btn-secondary" href="{{url('edit')}}">Hinzufügen</a>
+    <a class="center btn btn-secondary mt-3" href="{{url('edit')}}">Hinzufügen</a>
     <div class="row">
         @foreach($totalIncome as $key => $income)
-        <div class="w-25 m-3">
+        <div class="w-25 m-3t">
             <a href="{{URL::route('detail', ['date'=>$key], false)}}" style="text-decoration:none;">
-                <div class="card" >
+                <div class="card mt-5" >
                     <div class="card-header">
                         <h6 class="card-title text-center">{{$key}}</h6>
                     </div>
