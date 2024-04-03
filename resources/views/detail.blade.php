@@ -25,7 +25,7 @@
             @foreach($month[$key] as $financesForKey)
                 <div class="row">
                     <p class="w-50">{{$financesForKey['title']}}</p>
-                    <p class="w-25">{{$financesForKey['amount']}}</p>
+                    <p class="w-25">{{number_format($financesForKey['amount'], 2, '.', ',')}} €</p>
                     <div class="w-25">
                         <a href="{{URL::route('edit', ['id'=>$financesForKey['id']], false)}}" class="btn btn-secondary">Bearbeiten</a>
                         <a href="{{URL::route('delete_finance', ['id'=>$financesForKey['id'], 
@@ -39,7 +39,7 @@
     <div class="card-footer">
         <div class="row">
             <p class="w-50">Gesamt</p>
-            <p class="w-50">{{$total}}</p>
+            <p class="w-50">{{number_format($total, 2, '.', ',')}} €</p>
         </div>
     </div>
 </div>
