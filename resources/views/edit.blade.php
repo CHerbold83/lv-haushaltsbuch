@@ -26,8 +26,8 @@
                 <input type="text" value="{{ old('title', $finance->title) }}" class="w-50 @error('title') is-invalid @enderror" name="title" id="inputTitle">
             </div>
             <div class="mb-3">
-                <label for="inputAmount" class="form-label w-25">Betrag</label>
-                <input type="number" value="{{ old('amount', $finance->amount) }}" class="@error('amount') is-invalid @enderror" name="amount" id="inputAmount">
+                <label for="inputAmount" class="form-label w-25">Betrag in €</label>
+                <input type="number" step="0.01" value="{{ old('amount', number_format($finance->amount, 2, '.', ',')) }}" class="@error('amount') is-invalid @enderror" name="amount" id="inputAmount">
             </div>
             <div class="mb-3">
                 <label for="inputMonthly" class="form-label w-25">Monatlich</label>
